@@ -1,9 +1,14 @@
 import createHttpError from "../helpers/HttpError.js";
 import { verifyToken } from "../helpers/jwt";
 import { findUser } from "../services/authServices.js";
-import { RequestHandler } from "express";
+// import { RequestHandler } from "express";
+import { RequestHandler, Request, Response, NextFunction } from "express";
 
-const authenticate: RequestHandler = async (req, res, next) => {
+const authenticate: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return next(createHttpError(401, "Authorization header not found"));
@@ -26,7 +31,7 @@ const authenticate: RequestHandler = async (req, res, next) => {
 
   const { id } = payload;
 
-  const user = await findUser({ _id: id });
+  const user = await findUser({ id });
   if (!user) {
     return next(createHttpError(401, "User not found"));
   }
@@ -35,7 +40,7 @@ const authenticate: RequestHandler = async (req, res, next) => {
     return next(createHttpError(401, "User already logged out"));
   }
 
-  //   req.user = user;
+  req.user = user;
 
   next();
 };

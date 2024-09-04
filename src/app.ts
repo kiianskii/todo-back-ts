@@ -5,6 +5,7 @@ import cors from "cors";
 import { json } from "body-parser";
 
 import todoRoutes from "./routes/todoRoutes";
+import authRouter from "./routes/authRoutes";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(json());
 
 app.use("/todos", todoRoutes);
+app.use("/auth", authRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
