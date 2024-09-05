@@ -1,16 +1,16 @@
+import validateBody from "../helpers/validateBody";
+import authenticate from "../middlewares/authenticate";
+import isEmptyBody from "../middlewares/emptyBody";
+import todoControllers from "./../controllers/todoControllers";
 import { Router } from "express";
-import {
-  createTodo,
-  deleteTodo,
-  editTodo,
-  getTodos,
-} from "../controllers/todoControllers";
 
-const router = Router();
+const todoRouter = Router();
 
-router.post("/", createTodo);
-router.get("/", getTodos);
-router.patch("/:id", editTodo);
-router.delete("/:id", deleteTodo);
+todoRouter.use(authenticate);
 
-export default router;
+todoRouter.post("/", isEmptyBody, todoControllers.createTodo);
+todoRouter.get("/", validateBody, todoControllers.getAllTodos);
+todoRouter.patch("/:id", todoControllers.updateTodo);
+todoRouter.delete("/:id", todoControllers.deleteTodo);
+
+export default todoRouter;
