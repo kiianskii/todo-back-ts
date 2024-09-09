@@ -29,9 +29,9 @@ const authenticate: RequestHandler = async (
     return next(createHttpError(401, "Invalid token payload"));
   }
 
-  const { id } = payload;
+  // const { id } = payload;
 
-  const user = await findUser({ id });
+  const user = await findUser({ _id: payload.id });
   if (!user) {
     return next(createHttpError(401, "User not found"));
   }

@@ -22,6 +22,6 @@ todoSchema.pre("findOneAndUpdate", setUpdateSettings);
 
 todoSchema.post("findOneAndUpdate", handleError);
 
-const Todo = model("user", todoSchema);
+const Todo = model("todo", todoSchema);
 
 export default Todo;

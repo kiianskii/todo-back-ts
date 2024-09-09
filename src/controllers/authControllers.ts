@@ -58,7 +58,7 @@ const signin: RequestHandler = async (
 
   const token = createToken(payload);
 
-  await authServices.updateUser({ id: payload.id }, { token });
+  await authServices.updateUser({ _id: payload.id }, { token });
 
   res.json({
     token,
@@ -80,7 +80,7 @@ const getCurrent = (req: Request, res: Response, next: NextFunction) => {
 
 const signout = async (req: Request, res: Response, next: NextFunction) => {
   const { _id } = req.user;
-  await authServices.updateUser({ id: _id }, { token: "" });
+  await authServices.updateUser({ _id }, { token: "" });
 
   res.json({
     message: "Logout success",

@@ -1,10 +1,10 @@
 import User from "../models/User";
 
-export const findUser = (filter: { email?: string; id?: string }) =>
+export const findUser = (filter: { email?: string; _id?: string }) =>
   User.findOne(filter);
 
 export const updateUser = (
-  filter: { id: string },
+  filter: { _id: string },
   data: { username?: string; email?: string; password?: string; token?: string }
 ) => User.findOneAndUpdate(filter, data);
 
