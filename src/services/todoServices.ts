@@ -18,7 +18,7 @@ export const listTodos = (params: Params) => {
   const { filter, fields, settings } = params;
   return Todo.find(filter, fields, settings);
 };
-// export const getTodoById = (filter) => Todo.findOne(filter);
+
 export const removeTodo = (filter: Filter) => Todo.findOneAndDelete(filter);
 export const addTodo = (data: Data) => Todo.create(data);
 export const updateTodoById = (filter: Filter, data: Data) =>

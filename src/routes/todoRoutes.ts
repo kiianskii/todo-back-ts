@@ -9,7 +9,7 @@ const todoRouter = Router();
 todoRouter.use(authenticate);
 
 todoRouter.post("/", isEmptyBody, todoControllers.createTodo);
-todoRouter.get("/", validateBody, todoControllers.getAllTodos);
+todoRouter.get("/", todoControllers.getAllTodos);
 todoRouter.patch("/:id", todoControllers.updateTodo);
 todoRouter.delete("/:id", todoControllers.deleteTodo);
 
